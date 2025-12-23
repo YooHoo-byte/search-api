@@ -1,30 +1,24 @@
 {
-    "name": "pc-search-api",
-    "version": "1.0.0",
-    "private": true,
+    "name": "somwhatgoogle-api",
+    "version": "3.2.0",
     "type": "module",
-    "description": "A comprehensive search API with multiple fallbacks",
-    "main": "index.js",
     "scripts": {
+        "dev": "NODE_ENV=development node index.js",
+        "dev-memory": "NODE_OPTIONS=\"--max-old-space-size=4096\" NODE_ENV=development node index.js",
+        "prod": "NODE_ENV=production node index.js",
+        "prod-memory": "NODE_OPTIONS=\"--max-old-space-size=4096\" NODE_ENV=production node index.js",
         "start": "node index.js",
-        "dev": "node --watch index.js"
+        "render-start": "NODE_OPTIONS=\"--max-old-space-size=512\" node index.js"
     },
     "dependencies": {
         "cheerio": "^1.0.0-rc.12",
         "cors": "^2.8.5",
+        "dotenv": "^17.2.3",
         "express": "^4.18.2",
-        "helmet": "^8.1.0",
-        "http": "^0.0.1-security",
-        "https": "^1.0.0",
+        "helmet": "^7.1.0",
         "node-fetch": "^3.3.2"
     },
     "engines": {
-        "node": ">=18"
-    },
-    "keywords": [
-        "search",
-        "api",
-        "search-engine"
-    ],
-    "license": "MIT"
+        "node": ">=16.0.0"
+    }
 }
