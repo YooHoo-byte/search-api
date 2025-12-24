@@ -1,10 +1,120 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="0; url=./docs/" />
-    <script>
-      window.location.replace("./docs/");
-    </script>
-  </head>
-  <body></body>
+<html lang="en">
+<head>
+  <!-- Basic -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Primary SEO -->
+  <title>Search API — Privacy-first Search Aggregation</title>
+  <meta
+    name="description"
+    content="Search API is a privacy-first, fast search aggregation API built with Node.js and Cloudflare Workers. Simple JSON responses, no tracking."
+  />
+  <meta name="keywords" content="search api, privacy search, node.js api, cloudflare workers, open source search" />
+  <meta name="author" content="YooHoo-byte" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph (GitHub, Discord, etc.) -->
+  <meta property="og:title" content="Search API" />
+  <meta property="og:description" content="Privacy-first search aggregation API with clean JSON output." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yoohoo-byte.github.io/search-api/" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Search API" />
+  <meta name="twitter:description" content="Fast, privacy-first search aggregation API." />
+
+  <!-- Redirect (SEO-safe) -->
+  <link rel="canonical" href="./docs/" />
+  <meta http-equiv="refresh" content="1; url=./docs/" />
+
+  <!-- Styles -->
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --fg: #e6edf3;
+      --muted: #9aa4af;
+      --accent: #3b82f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .loader {
+      text-align: center;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .spinner {
+      width: 42px;
+      height: 42px;
+      border: 4px solid rgba(255, 255, 255, 0.15);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      animation: spin 1s linear infinite;
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      margin: 0.2rem 0;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <!-- JS redirect fallback -->
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        window.location.replace("./docs/");
+      }, 500);
+    });
+  </script>
+</head>
+
+<body>
+  <main class="loader">
+    <div class="spinner"></div>
+    <h1>Search API</h1>
+    <p>Loading documentation…</p>
+  </main>
+</body>
 </html>
