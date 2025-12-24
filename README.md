@@ -1,6 +1,6 @@
 # 🔍 Search API - Privacy-Focused Search Aggregation Service
 
-<div align="center">
+<div style="font: monospace">
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 ![Node Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)
