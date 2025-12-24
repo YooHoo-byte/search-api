@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Providers - Search API Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <style>
+        .provider-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .provider-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .provider-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .feature-item {
+            padding: 0.5rem;
+            background: var(--light-bg);
+            border-radius: 4px;
+        }
+        
+        .provider-meta {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            padding: 0.3rem 0.8rem;
+            background: #e3f2fd;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #1565c0;
+        }
+        
+        .config-example {
+            background: #2d3748;
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        
+        .comparison-table th {
+            background: var(--secondary-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .comparison-table tr:hover {
+            background: var(--light-bg);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-beta {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-planned {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1><i class="fas fa-search-plus"></i> Search Providers</h1>
+                <p class="tagline">Privacy-Focused Search Engines and Services</p>
+            </div>
+            <div class="version-badge">
+                <span class="badge">8 Providers</span>
+                <a href="index.html" class="home-link" style="color: white; margin-top: 0.5rem; display: block;">
+                    <i class="fas fa-arrow-left"></i> Back to Docs
+                </a>
+            </div>
+        </header>
+
+        <nav class="sidebar">
+            <div class="nav-header">
+                <h3><i class="fas fa-plug"></i> Providers</h3>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#overview"><i class="fas fa-info-circle"></i> Overview</a></li>
+                <li><a href="#web-providers"><i class="fas fa-globe"></i> Web Search</a></li>
+                <li><a href="#duckduckgo"><i class="fab fa-superpowers"></i> DuckDuckGo</a></li>
+                <li><a href="#startpage"><i class="fas fa-star"></i> StartPage</a></li>
+                <li><a href="#image-providers"><i class="fas fa-image"></i> Image Search</a></li>
+                <li><a href="#video-providers"><i class="fas fa-video"></i> Video Search</a></li>
+                <li><a href="#news-providers"><i class="fas fa-newspaper"></i> News Search</a></li>
+                <li><a href="#weather-providers"><i class="fas fa-cloud-sun"></i> Weather</a></li>
+                <li><a href="#adding-providers"><i class="fas fa-plus-circle"></i> Adding Providers</a></li>
+                <li><a href="#configuration"><i class="fas fa-cog"></i> Configuration</a></li>
+                <li><a href="#troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</a></li>
+            </ul>
+
+            <div class="nav-footer">
+                <a href="configuration.html" class="github-btn">
+                    <i class="fas fa-cog"></i> Provider Configuration
+                </a>
+            </div>
+        </nav>
+
+        <main class="content">
+            <section id="overview" class="section">
+                <h2><i class="fas fa-info-circle"></i> Provider Overview</h2>
+                <p>The Search API aggregates results from multiple privacy-respecting search providers. Each provider is independently configurable and can be enabled or disabled based on your requirements.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>3</h3>
+                            <p>Web Search Providers</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>2</h3>
+                            <p>Image Search Providers</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>2</h3>
+                            <p>Video Search Providers</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>1</h3>
+                            <p>News Aggregator</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-lightbulb"></i>
+                    <p><strong>Feature:</strong> The API automatically handles provider failures and uses fallback providers to ensure reliable service.</p>
+                </div>
+            </section>
+
+            <section id="web-providers" class="section">
+                <h2><i class="fas fa-globe"></i> Web Search Providers</h2>
+                <p>Web search providers offer general internet search capabilities with a focus on privacy and user anonymity.</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Provider</th>
+                            <th>Status</th>
+                            <th>Privacy Level</th>
+                            <th>Results Quality</th>
+                            <th>Speed</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>DuckDuckGo</strong></td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>High</td>
+                            <td>Excellent</td>
+                            <td>Fast</td>
+                            <td>✓ Primary</td>
+                        </tr>
+                        <tr>
+                            <td><strong>StartPage</strong></td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>Very High</td>
+                            <td>Excellent</td>
+                            <td>Medium</td>
+                            <td>✓ Fallback</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Marginalia</strong></td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>High</td>
+                            <td>Good (Technical)</td>
+                            <td>Slow</td>
+                            <td>Specialized</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="duckduckgo" class="section">
+                <h2><i class="fab fa-superpowers"></i> DuckDuckGo Provider</h2>
+
+                <div class="provider-card">
+                    <h3><i class="fab fa-superpowers"></i> DuckDuckGo</h3>
+                    <p>The default primary search provider. DuckDuckGo doesn't track users and delivers unbiased search results from multiple sources.</p>
+
+                    <div class="provider-meta">
+                        <span class="meta-item"><i class="fas fa-shield-alt"></i> No Tracking</span>
+                        <span class="meta-item"><i class="fas fa-bolt"></i> Instant Answers</span>
+                        <span class="meta-item"><i class="fas fa-globe"></i> Global Coverage</span>
+                        <span class="meta-item"><i class="fas fa-code"></i> Bang Commands</span>
+                    </div>
+
+                    <h4>Features</h4>
+                    <div class="provider-features">
+                        <div class="feature-item">
+                            <strong><i class="fas fa-user-shield"></i> Privacy</strong>
+                            <p>No user tracking or personal data collection</p>
+                        </div>
+                        <div class="feature-item">
+                            <strong><i class="fas fa-rocket"></i> Instant Answers</strong>
+                            <p>Direct answers for common queries</p>
+                        </div>
+                        <div class="feature-item">
+                            <strong><i class="fas fa-code-branch"></i> Bang Commands</strong>
+                            <p>Support for !g, !w, !yt shortcuts</p>
+                        </div>
+                        <div class="feature-item">
+                            <strong><i class="fas fa-language"></i> Localization</strong>
+                            <p>Region-specific results support</p>
+                        </div>
+                    </div>
+
+                    <h4>Configuration</h4>
+                    <div class="config-example">
+                        <pre><code class="language-env"># Enable/Disable DuckDuckGo
+ENABLE_DUCKDUCKGO=true
+
+# Region settings (optional)
+DDG_REGION=wt-wt  # Default: no region
+DDG_TIME=         # Time range: d, w, m, y
+
+# Safe search integration
+DDG_SAFE_SEARCH=-1  # -2=off, -1=moderate, 1=strict</code></pre>
+                    </div>
+
+                    <h4>API Integration</h4>
+                    <pre><code class="language-javascript">// Example: Using DuckDuckGo provider directly
+async function searchViaDuckDuckGo(query, options = {}) {
+  const { page = 1, safeSearch = 'moderate' } = options;
+  
+  const params = new URLSearchParams({
+    q: query,
+    s: (page - 1) * 100,  // Start index
+    dc: getSafeSearchCode(safeSearch),
+    kl: options.region || 'wt-wt'
+  });
+  
+  const url = `https://html.duckduckgo.com/html/?${params}`;
+  const html = await fetchHTML(url);
+  
+  // Parse and return results
+  return parseDuckDuckGoResults(html);
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="startpage" class="section">
+                <h2><i class="fas fa-star"></i> StartPage Provider</h2>
+
+                <div class="provider-card">
+                    <h3><i class="fas fa-star"></i> StartPage</h3>
+                    <p>Google search results with complete privacy protection. Acts as a proxy between you and Google.</p>
+
+                    <div class="provider-meta">
+                        <span class="meta-item"><i class="fas fa-google"></i> Google Results</span>
+                        <span class="meta-item"><i class="fas fa-user-secret"></i> Anonymous View</span>
+                        <span class="meta-item"><i class="fas fa-shield-alt"></i> Proxy Protection</span>
+                        <span class="meta-item"><i class="fas fa-filter"></i> Enhanced Privacy</span>
+                    </div>
+
+                    <h4>Features</h4>
+                    <div class="provider-features">
+                        <div class="feature-item">
+                            <strong><i class="fas fa-search"></i> Google Quality</strong>
+                            <p>Access to Google's search index without tracking</p>
+                        </div>
+                        <div class="feature-item">
+                            <strong><i class="fas fa-eye-slash"></i> Anonymous View</strong>
+                            <p>Browse websites without exposing your IP</p>
+                        </div>
+                        <div class="feature-item">
+                            <strong><i class="fas fa-filter"></i> Privacy Filter</strong>
+                            <p>Removes tracking parameters from URLs</p>
+                        </div>
+                        <div class="feature-item">
+                            <strong><i class="fas fa-cookie"></i> No Cookies</strong>
+                            <p>Doesn't use cookies for tracking</p>
+                        </div>
+                    </div>
+
+                    <h4>Configuration</h4>
+                    <div class="config-example">
+                        <pre><code class="language-env"># Enable/Disable StartPage
+ENABLE_STARTPAGE=true
+
+# Language and region
+SP_LANGUAGE=english
+SP_REGION=us
+
+# Privacy settings
+SP_ANONYMIZE=true
+SP_REMOVE_TRACKERS=true</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="image-providers" class="section">
+                <h2><i class="fas fa-image"></i> Image Search Providers</h2>
+
+                <div class="provider-card">
+                    <h3><i class="fas fa-camera"></i> Image Search</h3>
+                    <p>Aggregates images from multiple privacy-respecting sources with advanced filtering options.</p>
+
+                    <h4>Supported Sources</h4>
+                    <div class="provider-features">
+                        <div class="feature-item">
+                            <strong>Unsplash API</strong>
+                            <p>High-quality free images, Creative Commons Zero</p>
+                        </div>
+                        <div class="feature-item">
+                            <strong>Pixabay API</strong>
+                            <p>Free stock images, large collection</p>
+                        </div>
+                        <div class="feature-item">
+                            <strong>Privacy Aggregators</strong>
+                            <p>Multiple sources with safe search</p>
+                        </div>
+                    </div>
+
+                    <h4>Configuration</h4>
+                    <div class="config-example">
+                        <pre><code class="language-env"># Enable image search
+ENABLE_IMAGES=true
+
+# Image filters
+IMAGE_SIZE=large      # small, medium, large, all
+IMAGE_COLOR=color     # color, bw, transparent, all
+IMAGE_FORMAT=jpg      # jpg, png, gif, all
+IMAGE_ORIENTATION=all # horizontal, vertical, all
+
+# Provider settings
+UNSPLASH_ACCESS_KEY=your_key_here
+PIXABAY_API_KEY=your_key_here</code></pre>
+                    </div>
+
+                    <h4>Example Request</h4>
+                    <pre><code class="language-bash">curl "http://localhost:3000/images?q=nature&size=large&color=color&format=jpg"</code></pre>
+                </div>
+            </section>
+
+            <section id="video-providers" class="section">
+                <h2><i class="fas fa-video"></i> Video Search Providers</h2>
+
+                <div class="provider-card">
+                    <h3><i class="fas fa-film"></i> Video Search</h3>
+                    <p>Searches across privacy-focused video platforms without tracking.</p>
+
+                    <h4>Supported Platforms</h4>
+                    <div class="provider-features">
+                        <div class="feature-item">
+                            <strong>Invidious</strong>
+                            <p>YouTube front-end without Google tracking</p>
+                        </div>
+                        <div class="feature-item">
+                            <strong>PeerTube</strong>
+                            <p>Federated, decentralized video platform</p>
+                        </div>
+                    </div>
+
+                    <h4>Configuration</h4>
+                    <div class="config-example">
+                        <pre><code class="language-env"># Enable video search
+ENABLE_VIDEOS=true
+
+# Video filters
+VIDEO_DURATION=medium   # short, medium, long, all
+VIDEO_QUALITY=hd        # hd, sd, all
+VIDEO_SORT=relevance    # relevance, date, rating, views
+
+# Invidious instance
+INVIDIOUS_INSTANCE=https://inv.riverside.rocks
+PEERTUBE_INSTANCE=https://peertube.live</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="adding-providers" class="section">
+                <h2><i class="fas fa-plus-circle"></i> Adding New Providers</h2>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Create Provider File</h4>
+                            <p>Create a new file in <code>src/providers/</code>:</p>
+                            <pre><code class="language-javascript">// src/providers/new-provider.js
+export async function searchViaNewProvider(query, options = {}) {
+  const { page = 1, safeSearch = 'moderate' } = options;
+  
+  try {
+    // Fetch results from the provider
+    const results = await fetchNewProviderResults(query, page, safeSearch);
+    
+    // Format results consistently
+    return results.map((result, index) => ({
+      title: result.title,
+      url: result.link,
+      description: result.snippet,
+      source: 'NewProvider',
+      domain: extractDomain(result.link),
+      position: (page - 1) * 100 + index + 1,
+      timestamp: new Date().toISOString()
+    }));
+  } catch (error) {
+    console.error(`NewProvider search error:`, error.message);
+    return []; // Return empty array on failure
+  }
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Register the Provider</h4>
+                            <p>Add the provider to the provider registry:</p>
+                            <pre><code class="language-javascript">// In the main search function
+import { searchViaNewProvider } from './providers/new-provider.js';
+
+const providers = [
+  { name: 'newprovider', func: searchViaNewProvider, weight: 0.8 }
+];</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Add Configuration</h4>
+                            <p>Add environment variables for the new provider:</p>
+                            <pre><code class="language-env"># In .env.example
+ENABLE_NEW_PROVIDER=true
+NEW_PROVIDER_API_KEY=
+NEW_PROVIDER_URL=https://api.newprovider.com/search</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Update Documentation</h4>
+                            <p>Add the provider to this documentation page and update the API reference.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="troubleshooting" class="section">
+                <h2><i class="fas fa-wrench"></i> Provider Troubleshooting</h2>
+
+                <div class="troubleshooting-grid">
+                    <div class="issue">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Provider Not Returning Results</h4>
+                        <p><strong>Symptoms:</strong> Empty results from a specific provider</p>
+                        <p><strong>Solutions:</strong></p>
+                        <ul>
+                            <li>Check provider status: <code>curl https://provider-status.com</code></li>
+                            <li>Verify API keys and credentials</li>
+                            <li>Check rate limits on the provider's side</li>
+                            <li>Enable debug mode: <code>DEBUG_PROVIDERS=true</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="issue">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Slow Response Times</h4>
+                        <p><strong>Symptoms:</strong> Provider responses are slow</p>
+                        <p><strong>Solutions:</strong></p>
+                        <ul>
+                            <li>Increase timeout: <code>REQUEST_TIMEOUT=30000</code></li>
+                            <li>Reduce number of concurrent requests</li>
+                            <li>Check network connectivity to the provider</li>
+                            <li>Consider using a different provider instance</li>
+                        </ul>
+                    </div>
+
+                    <div class="issue">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Provider Blocking Requests</h4>
+                        <p><strong>Symptoms:</strong> 403 or 429 errors from provider</p>
+                        <p><strong>Solutions:</strong></p>
+                        <ul>
+                            <li>Rotate user agents</li>
+                            <li>Implement request delays</li>
+                            <li>Use proxy servers</li>
+                            <li>Contact provider for API access</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+
+    <style>
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .stat-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .stat-content h3 {
+            font-size: 2rem;
+            margin: 0;
+            color: var(--secondary-color);
+        }
+        
+        .stat-content p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</body>
+
+</html>

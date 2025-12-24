@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - Search API Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1><i class="fas fa-play-circle"></i> Getting Started</h1>
+                <p class="tagline">Installation and Setup Guide</p>
+            </div>
+            <div class="version-badge">
+                <span class="badge">v3.2.0</span>
+                <a href="index.html" class="home-link" style="color: white; margin-top: 0.5rem; display: block;">
+                    <i class="fas fa-arrow-left"></i> Back to Docs
+                </a>
+            </div>
+        </header>
+
+        <nav class="sidebar">
+            <div class="nav-header">
+                <h3><i class="fas fa-road"></i> Quick Start Guide</h3>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#prerequisites"><i class="fas fa-check-circle"></i> Prerequisites</a></li>
+                <li><a href="#installation"><i class="fas fa-download"></i> Installation</a></li>
+                <li><a href="#configuration"><i class="fas fa-cog"></i> Configuration</a></li>
+                <li><a href="#running"><i class="fas fa-play"></i> Running the Server</a></li>
+                <li><a href="#docker"><i class="fas fa-ship"></i> Docker Installation</a></li>
+                <li><a href="#verification"><i class="fas fa-check"></i> Verification</a></li>
+                <li><a href="#troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</a></li>
+                <li><a href="#next-steps"><i class="fas fa-arrow-right"></i> Next Steps</a></li>
+            </ul>
+
+            <div class="nav-footer">
+                <a href="configuration.html" class="github-btn">
+                    <i class="fas fa-cog"></i> Configuration Guide
+                </a>
+            </div>
+        </nav>
+
+        <main class="content">
+            <section id="prerequisites" class="section">
+                <h2><i class="fas fa-check-circle"></i> Prerequisites</h2>
+                <p>Before installing the Search API, ensure your system meets the following requirements:</p>
+
+                <div class="requirements-grid">
+                    <div class="requirement">
+                        <h4><i class="fab fa-node-js"></i> Node.js</h4>
+                        <p><strong>Version:</strong> 18.0.0 or higher</p>
+                        <p><strong>Check version:</strong></p>
+                        <pre><code class="language-bash">node --version</code></pre>
+                    </div>
+
+                    <div class="requirement">
+                        <h4><i class="fas fa-box"></i> npm or yarn</h4>
+                        <p><strong>Package manager</strong> for dependencies</p>
+                        <p><strong>Check version:</strong></p>
+                        <pre><code class="language-bash">npm --version
+# or
+yarn --version</code></pre>
+                    </div>
+
+                    <div class="requirement">
+                        <h4><i class="fas fa-memory"></i> System Resources</h4>
+                        <p><strong>RAM:</strong> 512MB minimum (1GB recommended)</p>
+                        <p><strong>Disk:</strong> 100MB free space</p>
+                        <p><strong>Network:</strong> Internet connection</p>
+                    </div>
+
+                    <div class="requirement">
+                        <h4><i class="fas fa-terminal"></i> Terminal Access</h4>
+                        <p>Command line access for installation</p>
+                        <p>Basic knowledge of terminal commands</p>
+                        <p>Permission to install packages</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <p><strong>Tip:</strong> If you don't have Node.js installed, download it from <a href="https://nodejs.org/" target="_blank">nodejs.org</a> or use a version manager like nvm.</p>
+                </div>
+            </section>
+
+            <section id="installation" class="section">
+                <h2><i class="fas fa-download"></i> Installation</h2>
+
+                <h3>Step 1: Clone the Repository</h3>
+                <p>Clone the Search API repository to your local machine:</p>
+                <pre><code class="language-bash"># Clone using HTTPS
+git clone https://github.com/YooHoo-byte/search-api.git
+
+# Or clone using SSH
+git clone git@github.com:YooHoo-byte/search-api.git
+
+# Navigate to the project directory
+cd search-api</code></pre>
+
+                <h3>Step 2: Install Dependencies</h3>
+                <p>Install all required Node.js dependencies:</p>
+                <div class="code-tabs">
+                    <div class="tab active" data-tab="npm">npm</div>
+                    <div class="tab" data-tab="yarn">yarn</div>
+                </div>
+
+                <div class="tab-content active" id="npm-tab">
+                    <pre><code class="language-bash">npm install</code></pre>
+                </div>
+
+                <div class="tab-content" id="yarn-tab">
+                    <pre><code class="language-bash">yarn install</code></pre>
+                </div>
+
+                <p>The installation will download and install the following dependencies:</p>
+                <ul>
+                    <li><strong>express</strong> - Web server framework</li>
+                    <li><strong>cheerio</strong> - HTML parsing</li>
+                    <li><strong>node-fetch</strong> - HTTP requests</li>
+                    <li><strong>cors</strong> - Cross-origin resource sharing</li>
+                    <li><strong>helmet</strong> - Security headers</li>
+                    <li><strong>dotenv</strong> - Environment variable management</li>
+                </ul>
+            </section>
+
+            <section id="configuration" class="section">
+                <h2><i class="fas fa-cog"></i> Configuration</h2>
+
+                <h3>Step 1: Create Environment File</h3>
+                <p>Copy the example environment file and customize it for your setup:</p>
+                <pre><code class="language-bash"># Copy the example environment file
+cp .env.example .env</code></pre>
+
+                <h3>Step 2: Configure Environment Variables</h3>
+                <p>Edit the <code>.env</code> file with your preferred text editor:</p>
+                <pre><code class="language-bash"># Using nano
+nano .env
+
+# Using vim
+vim .env
+
+# Using Visual Studio Code
+code .env</code></pre>
+
+                <p>Configure the essential settings:</p>
+                <pre><code class="language-env"># Basic Configuration
+PORT=3000
+NODE_ENV=development
+CORS_ORIGIN=*
+
+# Search Providers
+ENABLE_DUCKDUCKGO=true
+ENABLE_STARTPAGE=true
+ENABLE_IMAGES=true
+
+# Safe Search
+DEFAULT_SAFE_SEARCH=moderate
+
+# Performance
+REQUEST_TIMEOUT=20000
+MAX_RETRIES=5</code></pre>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p><strong>Important:</strong> Never commit your <code>.env</code> file to version control. It contains sensitive configuration details.</p>
+                </div>
+            </section>
+
+            <section id="running" class="section">
+                <h2><i class="fas fa-play"></i> Running the Server</h2>
+
+                <h3>Development Mode</h3>
+                <p>For development with auto-restart on file changes:</p>
+                <pre><code class="language-bash">npm run dev</code></pre>
+
+                <h3>Production Mode</h3>
+                <p>For production deployment:</p>
+                <pre><code class="language-bash">npm start</code></pre>
+
+                <h3>Using PM2 (Production)</h3>
+                <p>For production with process management:</p>
+                <pre><code class="language-bash"># Install PM2 globally
+npm install -g pm2
+
+# Start the application
+pm2 start src/index.js --name "search-api"
+
+# Monitor the application
+pm2 monit
+
+# View logs
+pm2 logs search-api</code></pre>
+
+                <h3>Expected Output</h3>
+                <p>When the server starts successfully, you should see:</p>
+                <pre><code class="language-bash">> search-api@3.2.0 start
+> node src/index.js
+
+Search API Server started on port 3000
+Environment: development
+Cache initialized
+Providers: DuckDuckGo, StartPage, Images
+Ready to accept requests...</code></pre>
+            </section>
+
+            <section id="docker" class="section">
+                <h2><i class="fas fa-ship"></i> Docker Installation</h2>
+
+                <h3>Using Docker Compose (Recommended)</h3>
+                <p>Create a <code>docker-compose.yml</code> file:</p>
+                <pre><code class="language-yaml">version: '3.8'
+services:
+  search-api:
+    image: search-api:latest
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - CORS_ORIGIN=*
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data</code></pre>
+
+                <p>Start the container:</p>
+                <pre><code class="language-bash"># Build and start
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop the container
+docker-compose down</code></pre>
+
+                <h3>Manual Docker Build</h3>
+                <pre><code class="language-bash"># Build the image
+docker build -t search-api .
+
+# Run the container
+docker run -p 3000:3000 \
+  -e PORT=3000 \
+  -e NODE_ENV=production \
+  --name search-api \
+  search-api</code></pre>
+            </section>
+
+            <section id="verification" class="section">
+                <h2><i class="fas fa-check"></i> Verification</h2>
+
+                <h3>Test the API</h3>
+                <p>Verify that the API is running correctly:</p>
+
+                <div class="verification-steps">
+                    <div class="step">
+                        <h4>1. Check Server Status</h4>
+                        <pre><code class="language-bash">curl http://localhost:3000/status</code></pre>
+                        <p>Expected response:</p>
+                        <pre><code class="language-json">{
+  "status": "online",
+  "version": "3.2.0",
+  "timestamp": "2025-12-24T10:30:00.000Z"
+}</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h4>2. Test Search Endpoint</h4>
+                        <pre><code class="language-bash">curl "http://localhost:3000/search?q=test"</code></pre>
+                        <p>Should return search results in JSON format.</p>
+                    </div>
+
+                    <div class="step">
+                        <h4>3. Test Cache Status</h4>
+                        <pre><code class="language-bash">curl http://localhost:3000/cache/stats</code></pre>
+                        <p>Should return cache statistics.</p>
+                    </div>
+                </div>
+
+                <h3>Web Browser Test</h3>
+                <p>Open your web browser and navigate to:</p>
+                <ul>
+                    <li><a href="http://localhost:3000/status" target="_blank">http://localhost:3000/status</a></li>
+                    <li><a href="http://localhost:3000/search?q=hello+world" target="_blank">http://localhost:3000/search?q=hello+world</a></li>
+                </ul>
+            </section>
+
+            <section id="troubleshooting" class="section">
+                <h2><i class="fas fa-wrench"></i> Troubleshooting</h2>
+
+                <div class="troubleshooting-grid">
+                    <div class="issue">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Port Already in Use</h4>
+                        <p><strong>Error:</strong> <code>Error: listen EADDRINUSE: address already in use :::3000</code></p>
+                        <p><strong>Solution:</strong></p>
+                        <pre><code class="language-bash"># Change port in .env file
+PORT=3001
+
+# Or kill process using port 3000
+sudo lsof -ti:3000 | xargs kill -9</code></pre>
+                    </div>
+
+                    <div class="issue">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Dependency Installation Failed</h4>
+                        <p><strong>Error:</strong> <code>npm ERR! Cannot find module</code></p>
+                        <p><strong>Solution:</strong></p>
+                        <pre><code class="language-bash"># Clear npm cache
+npm cache clean --force
+
+# Delete node_modules and package-lock.json
+rm -rf node_modules package-lock.json
+
+# Reinstall dependencies
+npm install</code></pre>
+                    </div>
+
+                    <div class="issue">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Docker Container Won't Start</h4>
+                        <p><strong>Error:</strong> <code>Container exits immediately</code></p>
+                        <p><strong>Solution:</strong></p>
+                        <pre><code class="language-bash"># Check container logs
+docker logs search-api
+
+# Run with interactive mode to see errors
+docker run -it --rm search-api</code></pre>
+                    </div>
+
+                    <div class="issue">
+                        <h4><i class="fas fa-exclamation-triangle"></i> No Search Results</h4>
+                        <p><strong>Issue:</strong> API returns empty results</p>
+                        <p><strong>Solution:</strong></p>
+                        <pre><code class="language-bash"># Check provider status
+curl http://localhost:3000/status
+
+# Enable debug logging in .env
+LOG_LEVEL=debug
+DEBUG_PROVIDERS=true</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="next-steps" class="section">
+                <h2><i class="fas fa-arrow-right"></i> Next Steps</h2>
+
+                <div class="next-steps-grid">
+                    <a href="configuration.html" class="next-step">
+                        <div class="step-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h4>Configuration Guide</h4>
+                        <p>Learn about advanced configuration options and environment variables.</p>
+                    </a>
+
+                    <a href="api-reference.html" class="next-step">
+                        <div class="step-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h4>API Reference</h4>
+                        <p>Explore all available endpoints, parameters, and response formats.</p>
+                    </a>
+
+                    <a href="deployment.html" class="next-step">
+                        <div class="step-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h4>Deployment Guide</h4>
+                        <p>Deploy to production with Docker, Kubernetes, or traditional servers.</p>
+                    </a>
+
+                    <a href="providers.html" class="next-step">
+                        <div class="step-icon">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                        <h4>Search Providers</h4>
+                        <p>Understand the available search providers and how to add new ones.</p>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+
+    <script>
+        // Tab functionality for npm/yarn tabs
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+
+                // Update active tab
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Show active content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

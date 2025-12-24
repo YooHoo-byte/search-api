@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contributing Guide - Search API Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <style>
+        .contributing-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .workflow-step {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--light-bg);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .guideline-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .guideline-list li {
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .guideline-list li i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .code-of-conduct {
+            background: #f8f9fa;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid #e9ecef;
+        }
+        
+        .pr-template {
+            background: #2d3748;
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .badge-list {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+        
+        .badge-item {
+            padding: 0.3rem 0.8rem;
+            background: #e3f2fd;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #1565c0;
+        }
+        
+        .contribution-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .contribution-type {
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .contribution-type:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .type-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1><i class="fas fa-hands-helping"></i> Contributing Guide</h1>
+                <p class="tagline">How to Contribute to the Search API Project</p>
+            </div>
+            <div class="version-badge">
+                <span class="badge">Open Source</span>
+                <a href="index.html" class="home-link" style="color: white; margin-top: 0.5rem; display: block;">
+                    <i class="fas fa-arrow-left"></i> Back to Docs
+                </a>
+            </div>
+        </header>
+
+        <nav class="sidebar">
+            <div class="nav-header">
+                <h3><i class="fas fa-code-branch"></i> Contributing</h3>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#overview"><i class="fas fa-info-circle"></i> Overview</a></li>
+                <li><a href="#code-of-conduct"><i class="fas fa-users"></i> Code of Conduct</a></li>
+                <li><a href="#getting-started"><i class="fas fa-play-circle"></i> Getting Started</a></li>
+                <li><a href="#development-workflow"><i class="fas fa-code"></i> Development Workflow</a></li>
+                <li><a href="#coding-standards"><i class="fas fa-laptop-code"></i> Coding Standards</a></li>
+                <li><a href="#testing"><i class="fas fa-vial"></i> Testing</a></li>
+                <li><a href="#documentation"><i class="fas fa-book"></i> Documentation</a></li>
+                <li><a href="#pull-requests"><i class="fas fa-code-pull-request"></i> Pull Requests</a></li>
+                <li><a href="#issue-reporting"><i class="fas fa-bug"></i> Issue Reporting</a></li>
+                <li><a href="#feature-requests"><i class="fas fa-lightbulb"></i> Feature Requests</a></li>
+                <li><a href="#adding-providers"><i class="fas fa-plus-circle"></i> Adding Providers</a></li>
+                <li><a href="#community"><i class="fas fa-comments"></i> Community</a></li>
+            </ul>
+
+            <div class="nav-footer">
+                <a href="https://github.com/YooHoo-byte/search-api" class="github-btn">
+                    <i class="fab fa-github"></i> Contribute on GitHub
+                </a>
+            </div>
+        </nav>
+
+        <main class="content">
+            <section id="overview" class="section">
+                <h2><i class="fas fa-info-circle"></i> Contributing Overview</h2>
+                <p>Thank you for your interest in contributing to the Search API project! This guide will help you understand the contribution process and ensure your contributions are consistent with project standards.</p>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-heart"></i>
+                    <p><strong>Welcome!</strong> We welcome contributions from developers of all skill levels. Whether you're fixing a typo, adding a feature, or reporting a bug, your help is appreciated.</p>
+                </div>
+
+                <div class="contribution-types">
+                    <div class="contribution-type">
+                        <div class="type-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <h4>Bug Reports</h4>
+                        <p>Report issues and help improve stability</p>
+                    </div>
+
+                    <div class="contribution-type">
+                        <div class="type-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h4>Code Contributions</h4>
+                        <p>Add features, fix bugs, improve code</p>
+                    </div>
+
+                    <div class="contribution-type">
+                        <div class="type-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4>Documentation</h4>
+                        <p>Improve docs, add examples, fix typos</p>
+                    </div>
+
+                    <div class="contribution-type">
+                        <div class="type-icon">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                        <h4>New Providers</h4>
+                        <p>Add support for new search providers</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="code-of-conduct" class="section">
+                <h2><i class="fas fa-users"></i> Code of Conduct</h2>
+
+                <div class="code-of-conduct">
+                    <h3>Our Pledge</h3>
+                    <p>We as members, contributors, and leaders pledge to make participation in our community a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender
+                        identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual identity and orientation.</p>
+
+                    <h3>Our Standards</h3>
+                    <p>Examples of behavior that contributes to a positive environment:</p>
+                    <ul>
+                        <li>Using welcoming and inclusive language</li>
+                        <li>Being respectful of differing viewpoints and experiences</li>
+                        <li>Gracefully accepting constructive criticism</li>
+                        <li>Focusing on what is best for the community</li>
+                        <li>Showing empathy towards other community members</li>
+                    </ul>
+
+                    <h3>Enforcement</h3>
+                    <p>Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the project maintainers. All complaints will be reviewed and investigated promptly and fairly.</p>
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>By participating in this project, you agree to abide by our Code of Conduct. Violations may result in temporary or permanent bans from the project.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="getting-started" class="section">
+                <h2><i class="fas fa-play-circle"></i> Getting Started</h2>
+
+                <div class="workflow-step">
+                    <h3><span class="step-number">1</span> Fork the Repository</h3>
+                    <p>Start by forking the repository on GitHub:</p>
+                    <ol>
+                        <li>Navigate to <a href="https://github.com/YooHoo-byte/search-api" target="_blank">github.com/YooHoo-byte/search-api</a></li>
+                        <li>Click the "Fork" button in the top-right corner</li>
+                        <li>This creates a copy of the repository under your GitHub account</li>
+                    </ol>
+                    <img src="https://docs.github.com/assets/cb-23088/mw-1440/images/help/repository/fork-button.webp" alt="Fork button" style="max-width: 100%; border-radius: var(--radius); margin: 1rem 0;">
+                </div>
+
+                <div class="workflow-step">
+                    <h3><span class="step-number">2</span> Clone Your Fork</h3>
+                    <p>Clone your forked repository to your local machine:</p>
+                    <pre><code class="language-bash"># Clone using HTTPS
+git clone https://github.com/YOUR_USERNAME/search-api.git
+
+# Or clone using SSH
+git clone git@github.com:YOUR_USERNAME/search-api.git
+
+# Navigate to the project directory
+cd search-api</code></pre>
+                </div>
+
+                <div class="workflow-step">
+                    <h3><span class="step-number">3</span> Set Up Remote</h3>
+                    <p>Add the original repository as an upstream remote:</p>
+                    <pre><code class="language-bash"># Add upstream remote
+git remote add upstream https://github.com/YooHoo-byte/search-api.git
+
+# Verify remotes
+git remote -v
+# Should show:
+# origin    https://github.com/YOUR_USERNAME/search-api.git (fetch)
+# origin    https://github.com/YOUR_USERNAME/search-api.git (push)
+# upstream  https://github.com/YooHoo-byte/search-api.git (fetch)
+# upstream  https://github.com/YooHoo-byte/search-api.git (push)</code></pre>
+                </div>
+
+                <div class="workflow-step">
+                    <h3><span class="step-number">4</span> Create a Branch</h3>
+                    <p>Create a new branch for your changes:</p>
+                    <pre><code class="language-bash"># Sync with upstream
+git fetch upstream
+git checkout main
+git merge upstream/main
+
+# Create a new feature branch
+git checkout -b feature/your-feature-name
+
+# Or a bug fix branch
+git checkout -b fix/issue-description
+
+# Or a documentation branch
+git checkout -b docs/topic-update</code></pre>
+                </div>
+            </section>
+
+            <section id="development-workflow" class="section">
+                <h2><i class="fas fa-code"></i> Development Workflow</h2>
+
+                <div class="contributing-card">
+                    <h3>Development Process</h3>
+
+                    <div class="badge-list">
+                        <span class="badge-item"><i class="fas fa-code-branch"></i> Branch Naming</span>
+                        <span class="badge-item"><i class="fas fa-commit"></i> Commit Messages</span>
+                        <span class="badge-item"><i class="fas fa-sync"></i> Regular Sync</span>
+                        <span class="badge-item"><i class="fas fa-check"></i> Testing</span>
+                    </div>
+
+                    <h4>Branch Naming Convention</h4>
+                    <p>Use descriptive branch names following this pattern:</p>
+                    <pre><code class="language-bash"># Feature branches
+feature/add-new-provider
+feature/enhance-cache
+
+# Bug fix branches
+fix/memory-leak-issue
+fix/rate-limiting-bug
+
+# Documentation branches
+docs/update-api-reference
+docs/add-examples
+
+# Chore branches
+chore/update-dependencies
+chore/ci-improvements</code></pre>
+
+                    <h4>Commit Message Guidelines</h4>
+                    <p>Follow conventional commit format:</p>
+                    <pre><code class="language-bash">feat: add support for new search provider
+fix: resolve memory leak in cache system
+docs: update API reference with examples
+style: fix code formatting issues
+refactor: improve provider abstraction
+test: add unit tests for cache module
+chore: update dependencies to latest versions</code></pre>
+
+                    <h4>Keeping Your Fork Updated</h4>
+                    <pre><code class="language-bash"># Fetch upstream changes
+git fetch upstream
+
+# Merge into your main branch
+git checkout main
+git merge upstream/main
+
+# Update your feature branch
+git checkout feature/your-feature
+git merge main</code></pre>
+                </div>
+            </section>
+
+            <section id="coding-standards" class="section">
+                <h2><i class="fas fa-laptop-code"></i> Coding Standards</h2>
+
+                <div class="contributing-card">
+                    <h3>JavaScript/Node.js Standards</h3>
+
+                    <ul class="guideline-list">
+                        <li><i class="fas fa-check-circle"></i> Use ES6+ features (const/let, arrow functions, destructuring)</li>
+                        <li><i class="fas fa-check-circle"></i> Prefer async/await over callbacks and promises</li>
+                        <li><i class="fas fa-check-circle"></i> Add JSDoc comments for all public functions</li>
+                        <li><i class="fas fa-check-circle"></i> Use descriptive variable and function names</li>
+                        <li><i class="fas fa-check-circle"></i> Handle errors appropriately with try/catch</li>
+                        <li><i class="fas fa-check-circle"></i> Follow the existing code style and patterns</li>
+                    </ul>
+
+                    <h4>Example Code Structure</h4>
+                    <div class="pr-template">
+                        <pre><code class="language-javascript">/**
+ * Search using a specific provider
+ * @param {string} query - Search query
+ * @param {Object} options - Search options
+ * @param {number} options.page - Page number
+ * @param {string} options.safeSearch - Safe search level
+ * @returns {Promise<Array>} Array of search results
+ * @throws {Error} If the provider request fails
+ */
+async function searchViaProvider(query, options = {}) {
+  const { page = 1, safeSearch = 'moderate' } = options;
+  
+  try {
+    // Implementation logic here
+    const results = await fetchResults(query, page, safeSearch);
+    
+    // Format results consistently
+    return results.map((result, index) => ({
+      title: result.title,
+      url: result.link,
+      description: result.snippet,
+      source: 'ProviderName',
+      domain: extractDomain(result.link),
+      position: (page - 1) * 100 + index + 1,
+      timestamp: new Date().toISOString()
+    }));
+  } catch (error) {
+    console.error(`Provider search error:`, error.message);
+    throw new Error(`Failed to search with provider: ${error.message}`);
+  }
+}</code></pre>
+                    </div>
+
+                    <h4>Project Structure</h4>
+                    <pre><code class="language-plaintext">search-api/
+├── src/
+│   ├── index.js              # Main application
+│   ├── providers/            # Search provider implementations
+│   │   ├── web/             # Web search providers
+│   │   ├── images/          # Image search providers
+│   │   └── utils/           # Provider utilities
+│   ├── middleware/           # Express middleware
+│   ├── utils/               # Utility functions
+│   └── routes/              # API routes
+├── tests/                   # Test files
+├── docs/                   # Documentation
+└── .github/                # GitHub workflows and templates</code></pre>
+                </div>
+            </section>
+
+            <section id="testing" class="section">
+                <h2><i class="fas fa-vial"></i> Testing</h2>
+
+                <div class="contributing-card">
+                    <h3>Test Requirements</h3>
+                    <p>All code changes must include appropriate tests. The project uses Jest as the testing framework.</p>
+
+                    <h4>Running Tests</h4>
+                    <pre><code class="language-bash"># Run all tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run specific test file
+npm test -- tests/unit/cache.test.js
+
+# Run in watch mode (development)
+npm run test:watch</code></pre>
+
+                    <h4>Test Structure</h4>
+                    <div class="pr-template">
+                        <pre><code class="language-javascript">// tests/unit/cache.test.js
+import { describe, it, expect, beforeEach, afterEach } from '@jest/globals';
+import { cacheGet, cacheSet, getCacheStats } from '../../src/utils/cache.js';
+
+describe('Cache System', () => {
+  beforeEach(() => {
+    // Setup before each test
+  });
+  
+  afterEach(() => {
+    // Cleanup after each test
+  });
+  
+  describe('cacheSet', () => {
+    it('should store data in cache', () => {
+      cacheSet('test-key', { data: 'test' });
+      const result = cacheGet('test-key');
+      expect(result).toEqual({ data: 'test' });
+    });
+    
+    it('should respect TTL', async () => {
+      cacheSet('temp-key', { data: 'temp' }, 100); // 100ms TTL
+      
+      // Should be available immediately
+      expect(cacheGet('temp-key')).toBeTruthy();
+      
+      // Wait for TTL to expire
+      await new Promise(resolve => setTimeout(resolve, 150));
+      
+      // Should be expired now
+      expect(cacheGet('temp-key')).toBeNull();
+    });
+  });
+  
+  describe('getCacheStats', () => {
+    it('should return correct statistics', () => {
+      cacheSet('key1', { data: 1 });
+      cacheSet('key2', { data: 2 });
+      
+      const stats = getCacheStats();
+      expect(stats.size).toBe(2);
+      expect(stats.hits).toBe(0);
+      expect(stats.misses).toBe(0);
+    });
+  });
+});</code></pre>
+                    </div>
+
+                    <h4>Test Coverage Requirements</h4>
+                    <ul>
+                        <li><strong>Unit Tests:</strong> 90% coverage for new code</li>
+                        <li><strong>Integration Tests:</strong> For API endpoints and provider integrations</li>
+                        <li><strong>Edge Cases:</strong> Test error conditions and boundary cases</li>
+                        <li><strong>Mocking:</strong> Mock external dependencies appropriately</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="pull-requests" class="section">
+                <h2><i class="fas fa-code-pull-request"></i> Pull Requests</h2>
+
+                <div class="contributing-card">
+                    <h3>Creating a Pull Request</h3>
+
+                    <div class="workflow-step">
+                        <h4>1. Push Your Changes</h4>
+                        <pre><code class="language-bash"># Commit your changes
+git add .
+git commit -m "feat: add new search provider"
+
+# Push to your fork
+git push origin feature/your-feature-name</code></pre>
+                    </div>
+
+                    <div class="workflow-step">
+                        <h4>2. Create Pull Request</h4>
+                        <ol>
+                            <li>Go to your fork on GitHub</li>
+                            <li>Click "Compare & pull request"</li>
+                            <li>Fill out the PR template completely</li>
+                            <li>Add reviewers if you know who should review</li>
+                            <li>Click "Create pull request"</li>
+                        </ol>
+                    </div>
+
+                    <h4>PR Template</h4>
+                    <div class="pr-template">
+                        <pre><code class="language-markdown">## Description
+<!-- Describe your changes in detail -->
+
+## Related Issue
+<!-- Link to the issue this PR fixes, if any -->
+Fixes #(issue number)
+
+## Type of Change
+<!-- Mark with an x -->
+- [ ] Bug fix (non-breaking change)
+- [ ] New feature (non-breaking change)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+- [ ] Documentation update
+- [ ] Code refactoring
+- [ ] Performance improvement
+
+## Testing
+<!-- Describe the tests you ran -->
+- [ ] Unit tests
+- [ ] Integration tests
+- [ ] Manual testing
+
+## Checklist
+<!-- Mark with an x -->
+- [ ] My code follows the style guidelines of this project
+- [ ] I have performed a self-review of my code
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] I have made corresponding changes to the documentation
+- [ ] My changes generate no new warnings
+- [ ] I have added tests that prove my fix is effective or that my feature works
+- [ ] New and existing unit tests pass locally with my changes
+
+## Screenshots/Logs
+<!-- If applicable, add screenshots or logs to help explain your changes --></code></pre>
+                    </div>
+
+                    <h4>PR Review Process</h4>
+                    <ul class="guideline-list">
+                        <li><i class="fas fa-clock"></i> PRs are typically reviewed within 2-3 business days</li>
+                        <li><i class="fas fa-comments"></i> Be responsive to review comments and questions</li>
+                        <li><i class="fas fa-sync"></i> Update your PR based on feedback</li>
+                        <li><i class="fas fa-check"></i> Ensure all checks pass (tests, linting, etc.)</li>
+                        <li><i class="fas fa-merge"></i> A maintainer will merge your PR once approved</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="adding-providers" class="section">
+                <h2><i class="fas fa-plus-circle"></i> Adding New Search Providers</h2>
+
+                <div class="contributing-card">
+                    <h3>Provider Contribution Guidelines</h3>
+                    <p>When adding a new search provider, ensure it aligns with the project's privacy-focused philosophy.</p>
+
+                    <h4>Provider Requirements</h4>
+                    <ul>
+                        <li><strong>Privacy-Focused:</strong> Must respect user privacy and avoid tracking</li>
+                        <li><strong>Terms of Service:</strong> Must allow programmatic access</li>
+                        <li><strong>Reliability:</strong> Should have good uptime and availability</li>
+                        <li><strong>Quality:</strong> Should provide relevant, high-quality results</li>
+                        <li><strong>API Access:</strong> Preferably free or reasonably priced</li>
+                    </ul>
+
+                    <h4>Implementation Steps</h4>
+                    <div class="pr-template">
+                        <pre><code class="language-javascript">// 1. Create provider file in src/providers/
+// src/providers/new-provider.js
+
+/**
+ * Search using NewProvider
+ * @param {string} query - Search query
+ * @param {Object} options - Search options
+ * @returns {Promise<Array>} Formatted search results
+ */
+export async function searchViaNewProvider(query, options = {}) {
+  const { page = 1, safeSearch = 'moderate' } = options;
+  
+  try {
+    // Construct API URL with parameters
+    const params = new URLSearchParams({
+      q: query,
+      page: page,
+      safe: safeSearch,
+      // Add other required parameters
+    });
+    
+    const url = `https://api.newprovider.com/search?${params}`;
+    
+    // Make request with appropriate headers
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': getRandomUserAgent(),
+        'Accept': 'application/json',
+      },
+      timeout: REQUEST_TIMEOUT,
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    
+    // Parse and format results
+    return data.results.map((result, index) => ({
+      title: result.title,
+      url: result.url,
+      description: result.description || result.snippet,
+      source: 'NewProvider',
+      domain: extractDomain(result.url),
+      position: (page - 1) * 100 + index + 1,
+      timestamp: new Date().toISOString(),
+    }));
+  } catch (error) {
+    console.error(`NewProvider search error:`, error.message);
+    return []; // Return empty array to allow fallback
+  }
+}</code></pre>
+                    </div>
+
+                    <h4>Required Documentation</h4>
+                    <p>When adding a new provider, also update:</p>
+                    <ul>
+                        <li><code>docs/providers.html</code> - Add provider documentation</li>
+                        <li><code>README.md</code> - Update supported providers list</li>
+                        <li><code>.env.example</code> - Add configuration variables</li>
+                        <li>Add tests for the new provider</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="community" class="section">
+                <h2><i class="fas fa-comments"></i> Community</h2>
+
+                <div class="contributing-card">
+                    <h3>Get Involved</h3>
+                    <p>Join our community of contributors and users:</p>
+
+                    <div class="community-links">
+                        <a href="https://github.com/YooHoo-byte/search-api" class="community-link">
+                            <i class="fab fa-github"></i> GitHub Repository
+                        </a>
+
+                        <a href="https://github.com/YooHoo-byte/search-api/issues" class="community-link">
+                            <i class="fas fa-bug"></i> Issue Tracker
+                        </a>
+
+                        <a href="https://github.com/YooHoo-byte/search-api/discussions" class="community-link">
+                            <i class="fas fa-comments"></i> Discussions
+                        </a>
+                    </div>
+
+                    <h4>Recognition</h4>
+                    <p>Contributors are recognized in several ways:</p>
+                    <ul>
+                        <li><strong>Contributors List:</strong> Added to CONTRIBUTORS.md</li>
+                        <li><strong>Release Notes:</strong> Mentioned in release announcements</li>
+                        <li><strong>Special Thanks:</strong> Recognized in documentation</li>
+                    </ul>
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-award"></i>
+                        <p><strong>First-time Contributors:</strong> Look for issues labeled "good first issue" or "help wanted" to get started with your first contribution!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+
+    <style>
+        .community-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .community-link {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem;
+            background: var(--light-bg);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .community-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .community-link i {
+            font-size: 1.2rem;
+        }
+    </style>
+</body>
+
+</html>

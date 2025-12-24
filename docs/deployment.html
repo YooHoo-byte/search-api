@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment Guide - Search API Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <style>
+        .deployment-option {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid;
+        }
+        
+        .deployment-option.docker {
+            border-left-color: #2496ed;
+        }
+        
+        .deployment-option.kubernetes {
+            border-left-color: #326ce5;
+        }
+        
+        .deployment-option.serverless {
+            border-left-color: #ff9900;
+        }
+        
+        .deployment-option.traditional {
+            border-left-color: var(--primary-color);
+        }
+        
+        .deployment-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .deployment-icon {
+            font-size: 2rem;
+        }
+        
+        .complexity-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        
+        .complexity-easy {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .complexity-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .complexity-hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .config-file {
+            background: #2d3748;
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .deployment-steps {
+            counter-reset: deployment-step;
+        }
+        
+        .deployment-step {
+            margin-bottom: 1.5rem;
+            padding-left: 3rem;
+            position: relative;
+        }
+        
+        .deployment-step:before {
+            counter-increment: deployment-step;
+            content: counter(deployment-step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .comparison-item {
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+        
+        .comparison-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1><i class="fas fa-server"></i> Deployment Guide</h1>
+                <p class="tagline">Production Deployment Options and Best Practices</p>
+            </div>
+            <div class="version-badge">
+                <span class="badge">v3.2.0</span>
+                <a href="index.html" class="home-link" style="color: white; margin-top: 0.5rem; display: block;">
+                    <i class="fas fa-arrow-left"></i> Back to Docs
+                </a>
+            </div>
+        </header>
+
+        <nav class="sidebar">
+            <div class="nav-header">
+                <h3><i class="fas fa-cloud-upload-alt"></i> Deployment</h3>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#overview"><i class="fas fa-info-circle"></i> Overview</a></li>
+                <li><a href="#prerequisites"><i class="fas fa-check-circle"></i> Prerequisites</a></li>
+                <li><a href="#docker"><i class="fab fa-docker"></i> Docker</a></li>
+                <li><a href="#kubernetes"><i class="fas fa-cubes"></i> Kubernetes</a></li>
+                <li><a href="#serverless"><i class="fas fa-bolt"></i> Serverless</a></li>
+                <li><a href="#traditional"><i class="fas fa-server"></i> Traditional</a></li>
+                <li><a href="#monitoring"><i class="fas fa-chart-line"></i> Monitoring</a></li>
+                <li><a href="#scaling"><i class="fas fa-expand-alt"></i> Scaling</a></li>
+                <li><a href="#backup"><i class="fas fa-database"></i> Backup & Recovery</a></li>
+                <li><a href="#security"><i class="fas fa-shield-alt"></i> Security</a></li>
+                <li><a href="#troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</a></li>
+            </ul>
+
+            <div class="nav-footer">
+                <a href="getting-started.html" class="github-btn">
+                    <i class="fas fa-play-circle"></i> Getting Started
+                </a>
+            </div>
+        </nav>
+
+        <main class="content">
+            <section id="overview" class="section">
+                <h2><i class="fas fa-info-circle"></i> Deployment Overview</h2>
+                <p>This guide covers various deployment options for the Search API in production environments. Choose the option that best fits your infrastructure, team expertise, and scalability requirements.</p>
+
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <h4><i class="fab fa-docker"></i> Docker</h4>
+                        <p><strong>Best for:</strong> Containerized deployments, CI/CD pipelines</p>
+                        <p><strong>Complexity:</strong> Medium</p>
+                        <p><strong>Scalability:</strong> High</p>
+                        <a href="#docker">View Guide →</a>
+                    </div>
+
+                    <div class="comparison-item">
+                        <h4><i class="fas fa-cubes"></i> Kubernetes</h4>
+                        <p><strong>Best for:</strong> Large-scale, cloud-native deployments</p>
+                        <p><strong>Complexity:</strong> High</p>
+                        <p><strong>Scalability:</strong> Very High</p>
+                        <a href="#kubernetes">View Guide →</a>
+                    </div>
+
+                    <div class="comparison-item">
+                        <h4><i class="fas fa-bolt"></i> Serverless</h4>
+                        <p><strong>Best for:</strong> Event-driven, cost-effective deployments</p>
+                        <p><strong>Complexity:</strong> Medium</p>
+                        <p><strong>Scalability:</strong> Automatic</p>
+                        <a href="#serverless">View Guide →</a>
+                    </div>
+
+                    <div class="comparison-item">
+                        <h4><i class="fas fa-server"></i> Traditional</h4>
+                        <p><strong>Best for:</strong> Simple deployments, dedicated servers</p>
+                        <p><strong>Complexity:</strong> Low</p>
+                        <p><strong>Scalability:</strong> Manual</p>
+                        <a href="#traditional">View Guide →</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="prerequisites" class="section">
+                <h2><i class="fas fa-check-circle"></i> Prerequisites</h2>
+
+                <div class="deployment-option">
+                    <h3>Production Checklist</h3>
+                    <p>Before deploying to production, ensure you have:</p>
+
+                    <div class="checklist">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check1" checked>
+                            <label for="check1">Updated all environment variables for production</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check2">
+                            <label for="check2">Configured proper logging and monitoring</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check3">
+                            <label for="check3">Set up database backups (if applicable)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check4">
+                            <label for="check4">Configured SSL/TLS certificates</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check5">
+                            <label for="check5">Set up firewall rules and security groups</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check6">
+                            <label for="check6">Created deployment documentation</label>
+                        </div>
+                    </div>
+
+                    <h4>Production Environment Variables</h4>
+                    <div class="config-file">
+                        <pre><code class="language-env"># Production Configuration
+NODE_ENV=production
+PORT=80
+CORS_ORIGIN=https://yourdomain.com
+
+# Security
+SESSION_SECRET=generated-secure-random-string
+RATE_LIMIT_MAX_REQUESTS=50
+RATE_LIMIT_WINDOW_MS=60000
+
+# Performance
+MAX_SOCKETS=200
+MAX_CACHE_SIZE=5000
+CACHE_TTL_MEDIUM=300000
+
+# Logging
+LOG_LEVEL=warn
+LOG_FORMAT=json</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="docker" class="section">
+                <h2><i class="fab fa-docker"></i> Docker Deployment</h2>
+
+                <div class="deployment-option docker">
+                    <div class="deployment-header">
+                        <div class="deployment-icon">
+                            <i class="fab fa-docker"></i>
+                        </div>
+                        <div>
+                            <h3>Docker Deployment</h3>
+                            <p>Containerized deployment for consistency across environments</p>
+                        </div>
+                        <span class="complexity-badge complexity-medium">Medium Complexity</span>
+                    </div>
+
+                    <h4>Dockerfile</h4>
+                    <div class="config-file">
+                        <pre><code class="language-dockerfile"># Dockerfile
+FROM node:18-alpine
+
+# Install dependencies
+RUN apk add --no-cache curl
+
+# Create app directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci --only=production
+
+# Copy application source
+COPY . .
+
+# Create non-root user
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S search-api -u 1001
+
+# Switch to non-root user
+USER search-api
+
+# Expose port
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3000/status || exit 1
+
+# Start application
+CMD ["node", "src/index.js"]</code></pre>
+                    </div>
+
+                    <h4>Docker Compose</h4>
+                    <div class="config-file">
+                        <pre><code class="language-yaml"># docker-compose.yml
+version: '3.8'
+services:
+  search-api:
+    build: .
+    image: search-api:3.2.0
+    container_name: search-api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - CORS_ORIGIN=https://yourdomain.com
+      - SESSION_SECRET=${SESSION_SECRET}
+    env_file:
+      - .env.production
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - search-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+  # Optional: Add Redis for distributed caching
+  redis:
+    image: redis:7-alpine
+    container_name: search-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - search-network
+
+networks:
+  search-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+    driver: local</code></pre>
+                    </div>
+
+                    <div class="deployment-steps">
+                        <h4>Deployment Steps</h4>
+
+                        <div class="deployment-step">
+                            <h5>1. Build Docker Image</h5>
+                            <pre><code class="language-bash">docker build -t search-api:3.2.0 .</code></pre>
+                        </div>
+
+                        <div class="deployment-step">
+                            <h5>2. Test Locally</h5>
+                            <pre><code class="language-bash">docker run -p 3000:3000 \
+  -e NODE_ENV=production \
+  --name search-api-test \
+  search-api:3.2.0</code></pre>
+                        </div>
+
+                        <div class="deployment-step">
+                            <h5>3. Push to Registry</h5>
+                            <pre><code class="language-bash"># Tag for registry
+docker tag search-api:3.2.0 yourregistry.com/search-api:3.2.0
+
+# Push to registry
+docker push yourregistry.com/search-api:3.2.0</code></pre>
+                        </div>
+
+                        <div class="deployment-step">
+                            <h5>4. Deploy to Server</h5>
+                            <pre><code class="language-bash"># Pull and run on production server
+docker pull yourregistry.com/search-api:3.2.0
+docker run -d \
+  -p 80:3000 \
+  --name search-api \
+  --restart unless-stopped \
+  -v /data/search-api:/app/data \
+  yourregistry.com/search-api:3.2.0</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="kubernetes" class="section">
+                <h2><i class="fas fa-cubes"></i> Kubernetes Deployment</h2>
+
+                <div class="deployment-option kubernetes">
+                    <div class="deployment-header">
+                        <div class="deployment-icon">
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                        <div>
+                            <h3>Kubernetes Deployment</h3>
+                            <p>Cloud-native deployment for high availability and scalability</p>
+                        </div>
+                        <span class="complexity-badge complexity-hard">High Complexity</span>
+                    </div>
+
+                    <h4>Deployment Manifest</h4>
+                    <div class="config-file">
+                        <pre><code class="language-yaml"># search-api-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search-api
+  namespace: production
+  labels:
+    app: search-api
+    version: "3.2.0"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: search-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: search-api
+    spec:
+      containers:
+      - name: search-api
+        image: yourregistry.com/search-api:3.2.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+          name: http
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: PORT
+          value: "3000"
+        - name: CORS_ORIGIN
+          value: "https://yourdomain.com"
+        - name: SESSION_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: search-api-secrets
+              key: session-secret
+        envFrom:
+        - configMapRef:
+            name: search-api-config
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+        volumeMounts:
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: logs
+        emptyDir: {}
+      restartPolicy: Always
+---
+# Service definition
+apiVersion: v1
+kind: Service
+metadata:
+  name: search-api-service
+  namespace: production
+spec:
+  selector:
+    app: search-api
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+    name: http
+  type: ClusterIP
+---
+# Ingress for external access
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: search-api-ingress
+  namespace: production
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - api.yourdomain.com
+    secretName: search-api-tls
+  rules:
+  - host: api.yourdomain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: search-api-service
+            port:
+              number: 80</code></pre>
+                    </div>
+
+                    <h4>Configuration Map</h4>
+                    <div class="config-file">
+                        <pre><code class="language-yaml"># configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: search-api-config
+  namespace: production
+data:
+  NODE_ENV: "production"
+  PORT: "3000"
+  CORS_ORIGIN: "https://yourdomain.com"
+  RATE_LIMIT_MAX_REQUESTS: "100"
+  MAX_CACHE_SIZE: "10000"
+  LOG_LEVEL: "info"
+  LOG_FORMAT: "json"</code></pre>
+                    </div>
+
+                    <h4>Deployment Commands</h4>
+                    <div class="deployment-steps">
+                        <div class="deployment-step">
+                            <h5>1. Apply Configuration</h5>
+                            <pre><code class="language-bash">kubectl apply -f configmap.yaml
+kubectl apply -f secrets.yaml</code></pre>
+                        </div>
+
+                        <div class="deployment-step">
+                            <h5>2. Deploy Application</h5>
+                            <pre><code class="language-bash">kubectl apply -f search-api-deployment.yaml</code></pre>
+                        </div>
+
+                        <div class="deployment-step">
+                            <h5>3. Verify Deployment</h5>
+                            <pre><code class="language-bash"># Check pods
+kubectl get pods -n production
+
+# Check deployment status
+kubectl rollout status deployment/search-api -n production
+
+# View logs
+kubectl logs -f deployment/search-api -n production</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="traditional" class="section">
+                <h2><i class="fas fa-server"></i> Traditional Server Deployment</h2>
+
+                <div class="deployment-option traditional">
+                    <div class="deployment-header">
+                        <div class="deployment-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div>
+                            <h3>Traditional Server Deployment</h3>
+                            <p>Direct deployment on virtual or physical servers</p>
+                        </div>
+                        <span class="complexity-badge complexity-easy">Easy Complexity</span>
+                    </div>
+
+                    <h4>PM2 Process Manager</h4>
+                    <p>Using PM2 for process management, monitoring, and auto-restart:</p>
+
+                    <div class="deployment-steps">
+                        <div class="deployment-step">
+                            <h5>1. Install PM2</h5>
+                            <pre><code class="language-bash">npm install -g pm2</code></pre>
+                        </div>
+
+                        <div class="deployment-step">
+                            <h5>2. Configure Ecosystem</h5>
+                            <div class="config-file">
+                                <pre><code class="language-javascript">// ecosystem.config.js
+module.exports = {
+  apps: [{
+    name: 'search-api',
+    script: 'src/index.js',
+    instances: 'max',
+    exec_mode: 'cluster',
+    autorestart: true,
+    watch: false,
+    max_memory_restart: '1G',
+    env: {
+      NODE_ENV: 'production',
+      PORT: 3000
+    },
+    env_production: {
+      NODE_ENV: 'production',
+      PORT: 3000
+    },
+    error_file: '/var/log/search-api/error.log',
+    out_file: '/var/log/search-api/out.log',
+    log_file: '/var/log/search-api/combined.log',
+    time: true,
+    merge_logs: true
+  }]
+};</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="deployment-step">
+                            <h5>3. Start Application</h5>
+                            <pre><code class="language-bash">pm2 start ecosystem.config.js --env production</code></pre>
+                        </div>
+
+                        <div class="deployment-step">
+                            <h5>4. Setup Startup Script</h5>
+                            <pre><code class="language-bash">pm2 startup
+pm2 save</code></pre>
+                        </div>
+
+                        <div class="deployment-step">
+                            <h5>5. Monitor Application</h5>
+                            <pre><code class="language-bash"># Real-time monitoring
+pm2 monit
+
+# View logs
+pm2 logs search-api
+
+# View status
+pm2 status</code></pre>
+                        </div>
+                    </div>
+
+                    <h4>NGINX Reverse Proxy</h4>
+                    <div class="config-file">
+                        <pre><code class="language-nginx"># /etc/nginx/sites-available/search-api
+server {
+    listen 80;
+    server_name api.yourdomain.com;
+    
+    # Redirect HTTP to HTTPS
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name api.yourdomain.com;
+    
+    # SSL Configuration
+    ssl_certificate /etc/letsencrypt/live/api.yourdomain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.yourdomain.com/privkey.pem;
+    
+    # Security headers
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    add_header X-Frame-Options DENY;
+    add_header X-Content-Type-Options nosniff;
+    add_header X-XSS-Protection "1; mode=block";
+    
+    # Proxy configuration
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+        
+        # Timeouts
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+    }
+    
+    # Rate limiting
+    limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
+    limit_req zone=api burst=20 nodelay;
+    
+    # Gzip compression
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_types text/plain text/css text/xml text/javascript 
+               application/javascript application/xml+rss 
+               application/json;
+    
+    # Access logs
+    access_log /var/log/nginx/search-api-access.log;
+    error_log /var/log/nginx/search-api-error.log;
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="monitoring" class="section">
+                <h2><i class="fas fa-chart-line"></i> Monitoring & Observability</h2>
+
+                <div class="deployment-option">
+                    <h3>Production Monitoring Setup</h3>
+
+                    <h4>Health Check Endpoints</h4>
+                    <pre><code class="language-bash"># Basic health check
+curl https://api.yourdomain.com/status
+
+# Detailed health check
+curl https://api.yourdomain.com/health
+
+# Metrics endpoint (Prometheus format)
+curl https://api.yourdomain.com/metrics</code></pre>
+
+                    <h4>Key Metrics to Monitor</h4>
+                    <div class="provider-features">
+                        <div class="feature-item">
+                            <strong>Response Times</strong>
+                            <p>P50, P95, P99 percentiles</p>
+                        </div>
+                        <div class="feature-item">
+                            <strong>Cache Performance</strong>
+                            <p>Hit rates, size, evictions</p>
+                        </div>
+                        <div class="feature-item">
+                            <strong>Error Rates</strong>
+                            <p>HTTP status codes, provider errors</p>
+                        </div>
+                        <div class="feature-item">
+                            <strong>Resource Usage</strong>
+                            <p>CPU, memory, network I/O</p>
+                        </div>
+                    </div>
+
+                    <h4>Alerting Rules Example</h4>
+                    <div class="config-file">
+                        <pre><code class="language-yaml"># alerting-rules.yaml
+groups:
+  - name: search-api-alerts
+    rules:
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High error rate on Search API"
+          description: "Error rate is {{ $value }} per second"
+          
+      - alert: CachePerformanceDegraded
+        expr: cache_hit_rate < 0.7
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Cache performance degraded"
+          description: "Cache hit rate is {{ $value }}"
+          
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High response time detected"
+          description: "95th percentile response time is {{ $value }}s"</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="troubleshooting" class="section">
+                <h2><i class="fas fa-wrench"></i> Deployment Troubleshooting</h2>
+
+                <div class="troubleshooting-grid">
+                    <div class="issue">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Application Won't Start</h4>
+                        <p><strong>Symptoms:</strong> Container exits immediately, PM2 shows stopped</p>
+                        <p><strong>Solutions:</strong></p>
+                        <ul>
+                            <li>Check logs: <code>docker logs search-api</code> or <code>pm2 logs</code></li>
+                            <li>Verify environment variables</li>
+                            <li>Check port availability</li>
+                            <li>Test with <code>node src/index.js</code> directly</li>
+                        </ul>
+                    </div>
+
+                    <div class="issue">
+                        <h4><i class="fas fa-exclamation-triangle"></i> High Memory Usage</h4>
+                        <p><strong>Symptoms:</strong> Memory usage grows over time, OOM kills</p>
+                        <p><strong>Solutions:</strong></p>
+                        <ul>
+                            <li>Reduce cache size: <code>MAX_CACHE_SIZE=5000</code></li>
+                            <li>Set memory limits in Docker/Kubernetes</li>
+                            <li>Enable garbage collection flags</li>
+                            <li>Monitor for memory leaks</li>
+                        </ul>
+                    </div>
+
+                    <div class="issue">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Network Connectivity Issues</h4>
+                        <p><strong>Symptoms:</strong> Can't reach external providers, timeouts</p>
+                        <p><strong>Solutions:</strong></p>
+                        <ul>
+                            <li>Check firewall rules</li>
+                            <li>Verify DNS resolution</li>
+                            <li>Test network connectivity from container</li>
+                            <li>Increase timeouts: <code>REQUEST_TIMEOUT=30000</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+
+    <style>
+        .checklist {
+            margin: 1rem 0;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .checklist-item input {
+            margin-right: 0.5rem;
+        }
+    </style>
+</body>
+
+</html>

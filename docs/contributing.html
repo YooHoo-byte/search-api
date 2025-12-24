@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration - Search API Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <style>
+        .config-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .config-table th {
+            background: var(--secondary-color);
+            color: white;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        
+        .config-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .config-table tr:hover {
+            background: var(--light-bg);
+        }
+        
+        .env-var {
+            font-family: 'Courier New', Courier, monospace;
+            background: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            color: #d63384;
+        }
+        
+        .required {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+        
+        .optional {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+        
+        .config-section {
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1><i class="fas fa-cog"></i> Configuration Guide</h1>
+                <p class="tagline">Environment Variables and Settings</p>
+            </div>
+            <div class="version-badge">
+                <span class="badge">v3.2.0</span>
+                <a href="index.html" class="home-link" style="color: white; margin-top: 0.5rem; display: block;">
+                    <i class="fas fa-arrow-left"></i> Back to Docs
+                </a>
+            </div>
+        </header>
+
+        <nav class="sidebar">
+            <div class="nav-header">
+                <h3><i class="fas fa-sliders-h"></i> Configuration</h3>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#overview"><i class="fas fa-info-circle"></i> Overview</a></li>
+                <li><a href="#environment"><i class="fas fa-file-code"></i> Environment Variables</a></li>
+                <li><a href="#server"><i class="fas fa-server"></i> Server Configuration</a></li>
+                <li><a href="#security"><i class="fas fa-shield-alt"></i> Security</a></li>
+                <li><a href="#search"><i class="fas fa-search"></i> Search Configuration</a></li>
+                <li><a href="#performance"><i class="fas fa-tachometer-alt"></i> Performance</a></li>
+                <li><a href="#cache"><i class="fas fa-database"></i> Cache Settings</a></li>
+                <li><a href="#logging"><i class="fas fa-clipboard-list"></i> Logging</a></li>
+                <li><a href="#providers"><i class="fas fa-plug"></i> Provider Settings</a></li>
+                <li><a href="#examples"><i class="fas fa-code"></i> Configuration Examples</a></li>
+            </ul>
+
+            <div class="nav-footer">
+                <a href="getting-started.html" class="github-btn">
+                    <i class="fas fa-play-circle"></i> Getting Started
+                </a>
+            </div>
+        </nav>
+
+        <main class="content">
+            <section id="overview" class="section">
+                <h2><i class="fas fa-info-circle"></i> Configuration Overview</h2>
+                <p>The Search API is configured using environment variables, providing flexibility across different deployment environments. This guide covers all available configuration options and their effects.</p>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-lightbulb"></i>
+                    <p><strong>Best Practice:</strong> Use different configuration files for different environments (development, staging, production) and never commit sensitive data to version control.</p>
+                </div>
+            </section>
+
+            <section id="environment" class="section">
+                <h2><i class="fas fa-file-code"></i> Environment Variables</h2>
+
+                <div class="config-section">
+                    <h3>Quick Reference</h3>
+                    <p>Copy this complete <code>.env.example</code> file to get started:</p>
+
+                    <pre><code class="language-env"># ========================================
+# SEARCH API CONFIGURATION
+# ========================================
+
+# Server Configuration
+PORT=3000
+NODE_ENV=development
+HOST=0.0.0.0
+
+# Security
+CORS_ORIGIN=*
+SESSION_SECRET=change-this-in-production
+TRUST_PROXY=1
+
+# Rate Limiting
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
+
+# Search Providers
+ENABLE_DUCKDUCKGO=true
+ENABLE_STARTPAGE=true
+ENABLE_MARGINALIA=true
+ENABLE_IMAGES=true
+ENABLE_VIDEOS=true
+ENABLE_NEWS=true
+ENABLE_WEATHER=true
+
+# Safe Search
+DEFAULT_SAFE_SEARCH=moderate
+
+# Performance
+REQUEST_TIMEOUT=20000
+MAX_RETRIES=5
+MAX_SOCKETS=100
+MAX_FREE_SOCKETS=20
+KEEP_ALIVE=true
+
+# Cache
+CACHE_TTL_SHORT=120000
+CACHE_TTL_MEDIUM=600000
+CACHE_TTL_LONG=3600000
+MAX_CACHE_SIZE=10000
+
+# Search Results
+RESULTS_PER_PAGE=100
+MAX_FETCH_RESULTS=500
+
+# Logging
+LOG_LEVEL=info
+LOG_FORMAT=combined
+ENABLE_ACCESS_LOGS=true
+
+# Development
+DISABLE_RATE_LIMIT=false
+DEBUG_PROVIDERS=false
+DISABLE_CACHE=false</code></pre>
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p><strong>Important:</strong> Always change the <code>SESSION_SECRET</code> in production to a strong, random value.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="server" class="section">
+                <h2><i class="fas fa-server"></i> Server Configuration</h2>
+
+                <table class="config-table">
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="env-var">PORT</span></td>
+                            <td>integer</td>
+                            <td>3000</td>
+                            <td><span class="optional">Optional</span></td>
+                            <td>Port the server listens on</td>
+                        </tr>
+                        <tr>
+                            <td><span class="env-var">NODE_ENV</span></td>
+                            <td>string</td>
+                            <td>development</td>
+                            <td><span class="optional">Optional</span></td>
+                            <td>Environment: <code>development</code>, <code>production</code>, <code>testing</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="env-var">HOST</span></td>
+                            <td>string</td>
+                            <td>0.0.0.0</td>
+                            <td><span class="optional">Optional</span></td>
+                            <td>Host address to bind to</td>
+                        </tr>
+                        <tr>
+                            <td><span class="env-var">TRUST_PROXY</span></td>
+                            <td>integer</td>
+                            <td>1</td>
+                            <td><span class="optional">Optional</span></td>
+                            <td>Number of proxies to trust (for rate limiting)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="config-section">
+                    <h4>Example Server Configurations</h4>
+
+                    <h5>Development:</h5>
+                    <pre><code class="language-env">PORT=3000
+NODE_ENV=development
+HOST=localhost
+TRUST_PROXY=0</code></pre>
+
+                    <h5>Production:</h5>
+                    <pre><code class="language-env">PORT=80
+NODE_ENV=production
+HOST=0.0.0.0
+TRUST_PROXY=1</code></pre>
+
+                    <h5>Behind Reverse Proxy (NGINX):</h5>
+                    <pre><code class="language-env">PORT=3000
+NODE_ENV=production
+HOST=127.0.0.1
+TRUST_PROXY=2</code></pre>
+                </div>
+            </section>
+
+            <section id="security" class="section">
+                <h2><i class="fas fa-shield-alt"></i> Security Configuration</h2>
+
+                <table class="config-table">
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="env-var">CORS_ORIGIN</span></td>
+                            <td>string</td>
+                            <td>*</td>
+                            <td><span class="optional">Optional</span></td>
+                            <td>CORS allowed origins (comma-separated)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="env-var">SESSION_SECRET</span></td>
+                            <td>string</td>
+                            <td>(none)</td>
+                            <td><span class="required">Required</span> in production</td>
+                            <td>Secret for session encryption</td>
+                        </tr>
+                        <tr>
+                            <td><span class="env-var">RATE_LIMIT_WINDOW_MS</span></td>
+                            <td>integer</td>
+                            <td>900000</td>
+                            <td><span class="optional">Optional</span></td>
+                            <td>Rate limit window in milliseconds (15 minutes)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="env-var">RATE_LIMIT_MAX_REQUESTS</span></td>
+                            <td>integer</td>
+                            <td>100</td>
+                            <td><span class="optional">Optional</span></td>
+                            <td>Max requests per IP per window</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="config-section">
+                    <h4>Security Best Practices</h4>
+
+                    <h5>Production CORS Settings:</h5>
+                    <pre><code class="language-env"># Allow specific domains only
+CORS_ORIGIN=https://example.com,https://api.example.com
+
+# Or allow subdomains
+CORS_ORIGIN=https://*.example.com</code></pre>
+
+                    <h5>Secure Session Secret:</h5>
+                    <pre><code class="language-env"># Generate a strong secret
+SESSION_SECRET=$(openssl rand -base64 32)
+
+# Or use a long random string
+SESSION_SECRET=sup3r-s3cr3t-l0ng-str1ng-w1th-symb0ls@!</code></pre>
+
+                    <h5>Strict Rate Limiting:</h5>
+                    <pre><code class="language-env"># Stricter limits for public APIs
+RATE_LIMIT_WINDOW_MS=60000  # 1 minute
+RATE_LIMIT_MAX_REQUESTS=30   # 30 requests per minute</code></pre>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p><strong>Critical:</strong> Never use the default <code>SESSION_SECRET</code> in production. Generate a unique, strong secret for each environment.</p>
+                </div>
+            </section>
+
+            <section id="search" class="section">
+                <h2><i class="fas fa-search"></i> Search Configuration</h2>
+
+                <table class="config-table">
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="env-var">RESULTS_PER_PAGE</span></td>
+                            <td>integer</td>
+                            <td>100</td>
+                            <td><span class="optional">Optional</span></td>
+                            <td>Number of results per page</td>
+                        </tr>
+                        <tr>
+                            <td><span class="env-var">MAX_FETCH_RESULTS</span></td>
+                            <td>integer</td>
+                            <td>500</td>
+                            <td><span class="optional">Optional</span></td>
+                            <td>Maximum results to fetch</td>
+                        </tr>
+                        <tr>
+                            <td><span class="env-var">DEFAULT_SAFE_SEARCH</span></td>
+                            <td>string</td>
+                            <td>moderate</td>
+                            <td><span class="optional">Optional</span></td>
+                            <td>Default safe search level</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="config-section">
+                    <h4>Search Configuration Examples</h4>
+
+                    <h5>High-Volume Search:</h5>
+                    <pre><code class="language-env">RESULTS_PER_PAGE=200
+MAX_FETCH_RESULTS=1000</code></pre>
+
+                    <h5>Conservative Settings:</h5>
+                    <pre><code class="language-env">RESULTS_PER_PAGE=50
+MAX_FETCH_RESULTS=200
+DEFAULT_SAFE_SEARCH=strict</code></pre>
+
+                    <h5>Developer Settings:</h5>
+                    <pre><code class="language-env">RESULTS_PER_PAGE=10  # Faster testing
+MAX_FETCH_RESULTS=50
+DEFAULT_SAFE_SEARCH=off</code></pre>
+                </div>
+            </section>
+
+            <!-- Continue with Performance, Cache, Logging, and Provider sections... -->
+
+            <section id="examples" class="section">
+                <h2><i class="fas fa-code"></i> Configuration Examples</h2>
+
+                <div class="config-section">
+                    <h3>Complete Configuration Examples</h3>
+
+                    <h4>Development Environment</h4>
+                    <pre><code class="language-env"># Development Configuration
+PORT=3000
+NODE_ENV=development
+CORS_ORIGIN=*
+
+# Security (relaxed for development)
+SESSION_SECRET=dev-secret-key
+RATE_LIMIT_MAX_REQUESTS=1000
+DISABLE_RATE_LIMIT=false
+
+# Search Providers
+ENABLE_DUCKDUCKGO=true
+ENABLE_STARTPAGE=true
+ENABLE_IMAGES=true
+ENABLE_VIDEOS=false
+ENABLE_NEWS=false
+ENABLE_WEATHER=false
+
+# Performance (optimized for development)
+REQUEST_TIMEOUT=30000
+MAX_RETRIES=3
+DISABLE_CACHE=false
+DEBUG_PROVIDERS=true
+
+# Logging (verbose for debugging)
+LOG_LEVEL=debug
+ENABLE_ACCESS_LOGS=true</code></pre>
+
+                    <h4>Production Environment</h4>
+                    <pre><code class="language-env"># Production Configuration
+PORT=80
+NODE_ENV=production
+CORS_ORIGIN=https://example.com
+
+# Security (strict in production)
+SESSION_SECRET=actual-production-secret-change-this
+RATE_LIMIT_MAX_REQUESTS=50
+RATE_LIMIT_WINDOW_MS=60000
+
+# Search Providers
+ENABLE_DUCKDUCKGO=true
+ENABLE_STARTPAGE=true
+ENABLE_IMAGES=true
+ENABLE_VIDEOS=true
+ENABLE_NEWS=true
+ENABLE_WEATHER=true
+
+# Performance (optimized for production)
+REQUEST_TIMEOUT=10000
+MAX_RETRIES=2
+MAX_SOCKETS=200
+MAX_FREE_SOCKETS=50
+CACHE_TTL_MEDIUM=300000  # 5 minutes
+
+# Logging (production appropriate)
+LOG_LEVEL=warn
+ENABLE_ACCESS_LOGS=true</code></pre>
+
+                    <h4>Docker Deployment</h4>
+                    <pre><code class="language-env"># Docker Configuration
+PORT=3000
+NODE_ENV=production
+HOST=0.0.0.0
+CORS_ORIGIN=*
+
+# Security
+SESSION_SECRET=${SESSION_SECRET}
+
+# Search
+RESULTS_PER_PAGE=100
+DEFAULT_SAFE_SEARCH=moderate
+
+# Performance
+MAX_SOCKETS=100
+MAX_CACHE_SIZE=5000
+
+# Logging
+LOG_LEVEL=info
+LOG_FORMAT=json</code></pre>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-lightbulb"></i>
+                    <p><strong>Tip:</strong> Use environment variable expansion in Docker and Kubernetes deployments to inject secrets securely at runtime.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</body>
+
+</html>
