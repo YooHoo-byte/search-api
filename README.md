@@ -16,9 +16,8 @@
 [Contributing](#-contributing)
 
 
-```md
+
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://demo-worker.yoohoo.workers.dev)
-</div>
 
 ---
 
@@ -1264,7 +1263,7 @@ curl "https://demo-worker.yoohoo.workers.dev/search?q=privacy"
 
 ---
 
-```md
+
 ### 🌐 Browser Test
 Open directly in your browser:
 
