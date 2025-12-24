@@ -1243,6 +1243,7 @@ The Search API is deployed as a **Cloudflare Worker** and returns raw JSON respo
 ```bash
 curl "https://demo-worker.yoohoo.workers.dev/search?q=privacy"
 
+
 📦 Example Response (truncated)
 
 {
@@ -1256,6 +1257,7 @@ curl "https://demo-worker.yoohoo.workers.dev/search?q=privacy"
     }
   ]
 }
+```
 
     ℹ️ The live endpoint returns 300+ lines of JSON.
     The response above is intentionally truncated for readability.
@@ -1267,22 +1269,22 @@ curl "https://demo-worker.yoohoo.workers.dev/search?q=privacy"
 ### 🌐 Browser Test
 Open directly in your browser:
 
-https://demo-worker.yoohoo.workers.dev/search?q=linux | jq
-https://demo-worker.yoohoo.workers.dev/images?q=linux | jq
-https://demo-worker.yoohoo.workers.dev/videos?q=linux | jq
-https://demo-worker.yoohoo.workers.dev/github?q=linux | jq
-https://demo-worker.yoohoo.workers.dev/news?q=linux | jq
-https://demo-worker.yoohoo.workers.dev/weather?q=linux | jq
-
-https://demo-worker.yoohoo.workers.dev/all?q=linux | jq
-
-https://demo-worker.yoohoo.workers.dev/massive?q=linux | jq
-
+```bash
+https://demo-worker.yoohoo.workers.dev/search?q=linux  #defualt web search
+https://demo-worker.yoohoo.workers.dev/images?q=linux  #image search
+https://demo-worker.yoohoo.workers.dev/videos?q=linux  #video search
+https://demo-worker.yoohoo.workers.dev/github?q=linux  #github search
+https://demo-worker.yoohoo.workers.dev/news?q=linux    #news search
+https://demo-worker.yoohoo.workers.dev/weather?q=linux #weather search
+https://demo-worker.yoohoo.workers.dev/all?q=linux     #search all images,web,video,github,news and all
+https://demo-worker.yoohoo.workers.dev/massive?q=linux #massive search returns over 70+ web pages if avalible
+```
 
 
 
 ```bash
-curl "https://demo-worker.yoohoo.workers.dev/search?q=linux" | jq
+curl "https://demo-worker.yoohoo.workers.dev/search?q=linux"
+```
 
 
 
@@ -1299,7 +1301,7 @@ Copy `.env.example` to `.env` and fill in your keys:
 
 ```bash
 cp .env.example .env
-
+```
 
 #### Load Balancing
 
