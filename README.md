@@ -1237,7 +1237,7 @@ functions:
 The Search API is deployed as a **Cloudflare Worker** and returns raw JSON responses.
 
 ### 🌍 Live Demo Endpoint
-🔗 **https://demo-worker.yoohoo.workers.dev**
+🔗 **[https://demo-worker.yoohoo.workers.dev](https://demo-worker.yoohoo.workers.dev)**
 
 ### 🔎 Example Request
 ```bash
@@ -1269,16 +1269,15 @@ curl "https://demo-worker.yoohoo.workers.dev/search?q=privacy"
 ### 🌐 Browser Test
 Open directly in your browser:
 
-```bash
-https://demo-worker.yoohoo.workers.dev/search?q=linux  #defualt web search
-https://demo-worker.yoohoo.workers.dev/images?q=linux  #image search
-https://demo-worker.yoohoo.workers.dev/videos?q=linux  #video search
-https://demo-worker.yoohoo.workers.dev/github?q=linux  #github search
-https://demo-worker.yoohoo.workers.dev/news?q=linux    #news search
-https://demo-worker.yoohoo.workers.dev/weather?q=linux #weather search
-https://demo-worker.yoohoo.workers.dev/all?q=linux     #search all images,web,video,github,news and all
-https://demo-worker.yoohoo.workers.dev/massive?q=linux #massive search returns over 70+ web pages if avalible
-```
+[https://demo-worker.yoohoo.workers.dev/search?q=linux](https://demo-worker.yoohoo.workers.dev/search?q=linux) #defualt web search
+[https://demo-worker.yoohoo.workers.dev/images?q=linux](https://demo-worker.yoohoo.workers.dev/images?q=linux)  #image search
+[https://demo-worker.yoohoo.workers.dev/videos?q=linux](https://demo-worker.yoohoo.workers.dev/videos?q=linux) #video search
+[https://demo-worker.yoohoo.workers.dev/github?q=linux](https://demo-worker.yoohoo.workers.dev/github?q=linux)  #github search
+[https://demo-worker.yoohoo.workers.dev/news?q=linux](https://demo-worker.yoohoo.workers.dev/news?q=linux)   #news search
+[https://demo-worker.yoohoo.workers.dev/weather?q=linux](https://demo-worker.yoohoo.workers.dev/weather?q=linux) #weather search
+[https://demo-worker.yoohoo.workers.dev/all?q=linux](https://demo-worker.yoohoo.workers.dev/all?q=linux)     #search all images,web,video,github,news and all
+[https://demo-worker.yoohoo.workers.dev/massive?q=linux](https://demo-worker.yoohoo.workers.dev/massive?q=linux) #massive search returns over 70+ web pages if avalible
+
 
 
 
