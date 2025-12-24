@@ -1,0 +1,20 @@
+<!-- docs/images/architecture.svg -->
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simplified architecture diagram -->
+  <rect x="50" y="50" width="200" height="100" fill="#3498db" stroke="#2c3e50"/>
+  <text x="150" y="100" fill="white" text-anchor="middle">Client Apps</text>
+  
+  <rect x="300" y="50" width="200" height="300" fill="#2ecc71" stroke="#27ae60"/>
+  <text x="400" y="200" fill="white" text-anchor="middle">Search API</text>
+  
+  <rect x="550" y="50" width="200" height="100" fill="#e74c3c" stroke="#c0392b"/>
+  <text x="650" y="100" fill="white" text-anchor="middle">Providers</text>
+  
+  <!-- Arrows -->
+  <line x1="250" y1="100" x2="300" y2="100" stroke="#7f8c8d" stroke-width="2"/>
+  <line x1="500" y1="100" x2="550" y2="100" stroke="#7f8c8d" stroke-width="2"/>
+  
+  <!-- Labels -->
+  <text x="275" y="90" fill="#7f8c8d" text-anchor="middle" font-size="12">API Requests</text>
+  <text x="525" y="90" fill="#7f8c8d" text-anchor="middle" font-size="12">Search Queries</text>
+</svg>
