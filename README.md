@@ -15,6 +15,9 @@
 [API Docs](#-api-reference) •
 [Contributing](#-contributing)
 
+
+```md
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://demo-worker.yoohoo.workers.dev)
 </div>
 
 ---
@@ -1239,7 +1242,7 @@ The Search API is deployed as a **Cloudflare Worker** and returns raw JSON respo
 
 ### 🔎 Example Request
 ```bash
-curl "https://demo-worker.yoohoo.workers.dev/api/search?q=privacy"
+curl "https://demo-worker.yoohoo.workers.dev/search?q=privacy"
 
 📦 Example Response (truncated)
 
@@ -1261,48 +1264,28 @@ curl "https://demo-worker.yoohoo.workers.dev/api/search?q=privacy"
 
 ---
 
-## 🔥 Why this is the **correct approach**
-
-- ✅ Shows the API works
-- ✅ Avoids breaking README rendering
-- ✅ Honest about large output
-- ✅ Matches how big projects do it
-
-GitHub **does not expect full API responses** in READMEs.
-
----
-
-## 🌐 Browser-friendly demo (optional but nice)
-
-Add this if you want people to click it:
-
 ```md
 ### 🌐 Browser Test
 Open directly in your browser:
 
-https://demo-worker.yoohoo.workers.dev/api/search?q=linux
+https://demo-worker.yoohoo.workers.dev/search?q=linux | jq
+https://demo-worker.yoohoo.workers.dev/images?q=linux | jq
+https://demo-worker.yoohoo.workers.dev/videos?q=linux | jq
+https://demo-worker.yoohoo.workers.dev/github?q=linux | jq
+https://demo-worker.yoohoo.workers.dev/news?q=linux | jq
+https://demo-worker.yoohoo.workers.dev/weather?q=linux | jq
 
-🧪 Advanced: Pretty-print hint (pro move)
+https://demo-worker.yoohoo.workers.dev/all?q=linux | jq
 
-### 🧰 Tip
-For readable output, pipe the response through `jq`:
+https://demo-worker.yoohoo.workers.dev/massive?q=linux | jq
+
+
+
 
 ```bash
-curl "https://demo-worker.yoohoo.workers.dev/api/search?q=linux" | jq
+curl "https://demo-worker.yoohoo.workers.dev/search?q=linux" | jq
 
 
----
-
-## 🏷️ Optional badge (looks professional)
-
-Put this near the top of your README:
-
-```md
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://demo-worker.yoohoo.workers.dev)
-
-### Performance Tuning
-
-#### Memory Optimization
 
 ```bash
 # Increase Node.js memory limit
