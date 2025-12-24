@@ -39,7 +39,6 @@
 - [Monitoring & Logging](#-monitoring--logging)
 - [Development](#-development)
 - [Demo](#-demo)
-- [Testing](#-testing)
 - [Contributing](#-contributing)
 - [License](#-license)
 - [Support](#️-support)
