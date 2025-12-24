@@ -36,6 +36,7 @@
 - [Deployment](#-deployment)
 - [Monitoring & Logging](#-monitoring--logging)
 - [Development](#-development)
+- [Demo](#-demo)
 - [Testing](#-testing)
 - [Contributing](#-contributing)
 - [License](#-license)
@@ -1228,6 +1229,76 @@ functions:
 </details>
 
 ---
+---
+### 🚀 Demo
+
+The Search API is deployed as a **Cloudflare Worker** and returns raw JSON responses.
+
+### 🌍 Live Demo Endpoint
+🔗 **https://demo-worker.yoohoo.workers.dev**
+
+### 🔎 Example Request
+```bash
+curl "https://demo-worker.yoohoo.workers.dev/api/search?q=privacy"
+
+📦 Example Response (truncated)
+
+{
+  "query": "privacy",
+  "totalResults": 300,
+  "results": [
+    {
+      "title": "Privacy Tools",
+      "url": "https://example.com",
+      "source": "DuckDuckGo"
+    }
+  ]
+}
+
+    ℹ️ The live endpoint returns 300+ lines of JSON.
+    The response above is intentionally truncated for readability.
+
+
+---
+
+## 🔥 Why this is the **correct approach**
+
+- ✅ Shows the API works
+- ✅ Avoids breaking README rendering
+- ✅ Honest about large output
+- ✅ Matches how big projects do it
+
+GitHub **does not expect full API responses** in READMEs.
+
+---
+
+## 🌐 Browser-friendly demo (optional but nice)
+
+Add this if you want people to click it:
+
+```md
+### 🌐 Browser Test
+Open directly in your browser:
+
+https://demo-worker.yoohoo.workers.dev/api/search?q=linux
+
+🧪 Advanced: Pretty-print hint (pro move)
+
+### 🧰 Tip
+For readable output, pipe the response through `jq`:
+
+```bash
+curl "https://demo-worker.yoohoo.workers.dev/api/search?q=linux" | jq
+
+
+---
+
+## 🏷️ Optional badge (looks professional)
+
+Put this near the top of your README:
+
+```md
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://demo-worker.yoohoo.workers.dev)
 
 ### Performance Tuning
 
