@@ -39,6 +39,7 @@
 - [Monitoring & Logging](#-monitoring--logging)
 - [Development](#-development)
 - [Demo](#-demo)
+- [.env](#-env-examples)
 - [Contributing](#-contributing)
 - [License](#-license)
 - [Support](#️-support)
@@ -1292,6 +1293,13 @@ NODE_OPTIONS="--max-old-space-size=1024"
 # Configure garbage collection
 NODE_OPTIONS="--max-old-space-size=1024 --gc-interval=100"
 ```
+### Environment Variables
+
+Copy `.env.example` to `.env` and fill in your keys:
+
+```bash
+cp .env.example .env
+
 
 #### Load Balancing
 
