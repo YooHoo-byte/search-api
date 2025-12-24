@@ -2960,7 +2960,7 @@ app.use((err, req, res, next) => {
 const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`
 ╔══════════════════════════════════════════════════════════════╗
-║                   Somwhatgoogle API v3.2.0                   ║
+║                   Search API v3.2.0                          ║
 ║            Privacy-focused search with 100+ results          ║
 ║                                                              ║
 ║           🌐 Server: http://localhost:${PORT}                ${' '.repeat(20 - PORT.toString().length)}║
